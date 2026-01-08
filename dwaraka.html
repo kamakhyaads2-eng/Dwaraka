@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dwaraka Grand Gajwel | Digital Profile</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Telugu:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        zinc: {
+                            850: '#18181b',
+                            950: '#09090b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        telugu: ['"Noto Sans Telugu"', 'sans-serif'],
+                    },
+                    animation: {
+                        'slow-pulse': 'pulseCustom 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        pulseCustom: {
+                            '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
+                            '50%': { opacity: 0.1, transform: 'scale(1.1)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:active {
+            transform: scale(0.98);
+            background: rgba(24, 24, 27, 0.8);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        .logo-ring {
+            position: relative;
+        }
+        .logo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 9999px;
+            animation: pulseCustom 3s infinite;
+        }
+
+        #toast {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+    </style>
+</head>
+<body class="no-scrollbar">
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-amber-600/10 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[10%] -right-[10%] w-[30%] h-[30%] bg-amber-500/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <main class="relative z-10 max-w-md mx-auto min-h-screen px-6 pt-8 pb-16 flex flex-col">
+        
+        <!-- Top Navigation -->
+        <div class="flex justify-end mb-10">
+            <button onclick="toggleLanguage()" class="group flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-800 text-[10px] font-bold tracking-widest uppercase hover:border-amber-500/50 transition-all">
+                <i data-lucide="languages" class="w-3 h-3 text-amber-500"></i>
+                <span id="langBtnText">తెలుగు</span>
+            </button>
+        </div>
+
+        <!-- Brand Header -->
+        <header class="text-center mb-12 animate-slide-up">
+            <div class="inline-block logo-ring mb-8">
+                <div class="w-24 h-24 rounded-full bg-zinc-900 border-2 border-zinc-800 p-1 shadow-2xl overflow-hidden">
+                    <img 
+                        src="dwarakalogo.jpg" 
+                        alt="Dwaraka Grand Logo" 
+                        class="w-full h-full object-cover rounded-full"
+                    >
+                </div>
+            </div>
+            
+            <h1 id="resName" class="text-3xl font-serif font-bold text-white mb-2 tracking-tight">
+                Dwaraka Grand <span class="text-amber-500">Gajwel</span>
+            </h1>
+            
+            <p id="resTagline" class="text-amber-500/80 font-semibold tracking-[0.25em] uppercase text-[9px] mb-4">
+                A Tradition of World-Class Elegance
+            </p>
+            
+            <p id="resWelcome" class="text-zinc-400 text-sm leading-relaxed max-w-[280px] mx-auto font-light">
+                Experience the finest authentic flavors. Connect with our team instantly.
+            </p>
+        </header>
+
+        <!-- CTA Links Container -->
+        <div id="ctaContainer" class="space-y-4 animate-slide-up" style="animation-delay: 100ms;">
+            <!-- Buttons injected by JS -->
+        </div>
+
+        <!-- Utility Grid -->
+        <div class="grid grid-cols-2 gap-4 mt-10 animate-slide-up" style="animation-delay: 200ms;">
+            <button onclick="handleShare()" class="glass-card flex flex-col items-center justify-center gap-3 py-6 rounded-2xl group">
+                <div class="p-3 rounded-full bg-zinc-900 group-hover:bg-amber-500/10 transition-colors">
+                    <i data-lucide="share-2" class="w-5 h-5 text-amber-500"></i>
+                </div>
+                <span id="shareLabel" class="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-300">Share Profile</span>
+            </button>
+            <button onclick="toggleQR(true)" class="glass-card flex flex-col items-center justify-center gap-3 py-6 rounded-2xl group">
+                <div class="p-3 rounded-full bg-zinc-900 group-hover:bg-amber-500/10 transition-colors">
+                    <i data-lucide="qr-code" class="w-5 h-5 text-amber-500"></i>
+                </div>
+                <span id="qrLabel" class="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-300">Show QR Code</span>
+            </button>
+        </div>
+
+        <!-- Branding Footer -->
+        <footer class="mt-20 text-center animate-slide-up" style="animation-delay: 300ms;">
+            <div class="w-12 h-[1px] bg-amber-900/30 mx-auto mb-6"></div>
+            <p id="footerCopy" class="text-zinc-600 text-[10px] uppercase tracking-[0.2em] font-medium mb-2">
+                &copy; 2025 Dwaraka Grand Gajwel.
+            </p>
+            <p class="text-zinc-800 text-[9px] font-bold uppercase tracking-[0.1em]">
+                Digital Presence by <span class="text-zinc-500">Kamakhya Ads</span>
+            </p>
+        </footer>
+    </main>
+
+    <!-- QR Modal -->
+    <div id="qrModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl opacity-0 transition-opacity duration-300">
+        <div class="relative bg-zinc-950 border border-zinc-800/50 p-8 rounded-[40px] max-w-sm w-full text-center shadow-[0_0_50px_rgba(245,158,11,0.15)] transform scale-95 transition-transform duration-300" id="qrContent">
+            <button onclick="toggleQR(false)" class="absolute top-6 right-6 p-2 text-zinc-600 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="utensils-crosses" class="w-8 h-8 text-amber-500"></i>
+            </div>
+            
+            <h2 id="modalName" class="text-xl font-serif font-bold text-white mb-2">Dwaraka Grand Gajwel</h2>
+            <p class="text-amber-500 text-[9px] mb-8 uppercase tracking-[0.2em] font-bold">Scan to Discover More</p>
+            
+            <div class="bg-white p-4 rounded-[2.5rem] inline-block mb-8 shadow-2xl">
+                <img id="qrImg" src="" alt="QR Code" class="w-48 h-48 block">
+            </div>
+            
+            <p id="modalDesc" class="text-zinc-500 text-xs font-light leading-relaxed">
+                Scan this code to instantly access our digital profile and menu.
+            </p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-amber-600 text-black px-6 py-3 rounded-full shadow-2xl text-xs font-bold z-[100] opacity-0 pointer-events-none transform translate-y-4">
+        Link copied to clipboard!
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        const contactInfo = {
+            phone: "+91 90000 98870",
+            whatsapp: "https://wa.me/919000098870",
+            maps: "https://maps.app.goo.gl/rqq4H7CtEmo2CJQv6",
+            insta: "https://www.instagram.com/dwarakagrand.gajwel/",
+            reviews: "https://www.google.com/search?q=dwaraka+grand+gajwel+reviews"
+        };
+
+        const translations = {
+            en: {
+                resName: 'Dwaraka Grand <span class="text-amber-500">Gajwel</span>',
+                resTagline: 'A Tradition of World-Class Elegance',
+                resWelcome: 'Experience the finest authentic flavors. Connect with our team instantly.',
+                cta: [
+                    { title: "Find Our Restaurant", sub: "Navigate via Google Maps", icon: "map-pin", color: "bg-amber-600", link: contactInfo.maps },
+                    { title: "Order on WhatsApp", sub: "Instant support & Direct updates", icon: "message-circle", color: "bg-green-600", link: contactInfo.whatsapp },
+                    { title: "Call Us Directly", sub: contactInfo.phone, icon: "phone", color: "bg-zinc-800", link: `tel:${contactInfo.phone.replace(/\s/g, '')}` },
+                    { title: "Instagram Gallery", sub: "Follow for daily specials", icon: "instagram", color: "bg-zinc-800", link: contactInfo.insta },
+                    { title: "Share Your Feedback", sub: "Rate your experience with us", icon: "star", color: "bg-zinc-800", link: contactInfo.reviews },
+                ],
+                share: "Share Profile",
+                qr: "Show QR Code",
+                footer: "© 2025 Dwaraka Grand Gajwel.",
+                modalDesc: "Scan this code to instantly access our digital profile and menu.",
+                langBtn: "తెలుగు"
+            },
+            te: {
+                resName: 'ద్వారక గ్రాండ్ <span class="text-amber-500">గజ్వేల్</span>',
+                resTagline: 'అద్భుతమైన రుచుల సంప్రదాయం',
+                resWelcome: 'అత్యుత్తమ ప్రామాణిక రుచులను ఆస్వాదించండి. వెంటనే మా బృందంతో కనెక్ట్ అవ్వండి.',
+                cta: [
+                    { title: "మా రెస్టారెంట్‌ను కనుగొనండి", sub: "గూగుల్ మ్యాప్స్ ద్వారా రండి", icon: "map-pin", color: "bg-amber-600", link: contactInfo.maps },
+                    { title: "వాట్సాప్‌లో ఆర్డర్ చేయండి", sub: "తక్షణ మద్దతు & అప్‌డేట్‌లు", icon: "message-circle", color: "bg-green-600", link: contactInfo.whatsapp },
+                    { title: "నేరుగా మాకు కాల్ చేయండి", sub: contactInfo.phone, icon: "phone", color: "bg-zinc-800", link: `tel:${contactInfo.phone.replace(/\s/g, '')}` },
+                    { title: "ఇన్‌స్టాగ్రామ్ గ్యాలరీ", sub: "రోజువారీ విశేషాల కోసం అనుసరించండి", icon: "instagram", color: "bg-zinc-800", link: contactInfo.insta },
+                    { title: "మీ అభిప్రాయాన్ని పంచుకోండి", sub: "మా సేవలను రేట్ చేయండి", icon: "star", color: "bg-zinc-800", link: contactInfo.reviews },
+                ],
+                share: "ప్రొఫైల్‌ను షేర్ చేయండి",
+                qr: "QR కోడ్ చూపించు",
+                footer: "© 2025 ద్వారక గ్రాండ్ గజ్వేల్.",
+                modalDesc: "మా డిజిటల్ ప్రొఫైల్ మరియు మెనూని పొందడానికి ఈ కోడ్‌ని స్కాన్ చేయండి.",
+                langBtn: "English"
+            }
+        };
+
+        function render() {
+            const data = translations[currentLang];
+            
+            document.getElementById('resName').innerHTML = data.resName;
+            document.getElementById('resTagline').innerText = data.resTagline;
+            document.getElementById('resWelcome').innerText = data.resWelcome;
+            document.getElementById('shareLabel').innerText = data.share;
+            document.getElementById('qrLabel').innerText = data.qr;
+            document.getElementById('footerCopy').innerText = data.footer;
+            document.getElementById('langBtnText').innerText = data.langBtn;
+            document.getElementById('modalDesc').innerText = data.modalDesc;
+
+            const container = document.getElementById('ctaContainer');
+            container.innerHTML = '';
+            
+            data.cta.forEach((item, index) => {
+                const btn = document.createElement('a');
+                btn.href = item.link;
+                btn.target = "_blank";
+                btn.className = "glass-card block p-4 rounded-2xl flex items-center group";
+                
+                btn.innerHTML = `
+                    <div class="w-12 h-12 rounded-xl ${item.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <i data-lucide="${item.icon}" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h3 class="font-bold text-sm text-zinc-100 ${currentLang === 'te' ? 'font-telugu' : ''}">${item.title}</h3>
+                        <p class="text-[10px] text-zinc-500 font-medium">${item.sub}</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-700 group-hover:translate-x-1 group-hover:text-amber-500 transition-all"></i>
+                `;
+                container.appendChild(btn);
+            });
+
+            lucide.createIcons();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            render();
+        }
+
+        function toggleQR(show) {
+            const modal = document.getElementById('qrModal');
+            const content = document.getElementById('qrContent');
+            const qrImg = document.getElementById('qrImg');
+            
+            if (show) {
+                // Generate QR based on current URL or fall back to Instagram if local
+                const currentUrl = window.location.href;
+                const finalUrl = currentUrl.startsWith('http') ? currentUrl : contactInfo.insta;
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(finalUrl)}&bgcolor=ffffff&color=000000`;
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
+            } else {
+                modal.classList.add('opacity-0');
+                content.classList.add('scale-95');
+                content.classList.remove('scale-100');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        async function handleShare() {
+            const shareData = {
+                title: 'Dwaraka Grand Gajwel',
+                text: 'Check out the digital profile of Dwaraka Grand Gajwel!',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) { console.log('Share error', err); }
+            } else {
+                const el = document.createElement('textarea');
+                el.value = window.location.href;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                showToast();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 2500);
+        }
+
+        window.onload = render;
+    </script>
+</body>
+</html>
